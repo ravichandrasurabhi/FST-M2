@@ -1,0 +1,14 @@
+services:
+    redis-server:
+        image: 'redis'
+        volumes:
+            - ./redis:/usr/app
+        command: ["redis-server","--save","1 1","--protected-mode", "no"]
+    node-app:
+        build: ./
+        image: docker.io/Bommisuch/visits
+        volumes:
+            - ./:/usr/app
+            - /usr/app/node_modules
+        ports:
+            - "8081:8081"
